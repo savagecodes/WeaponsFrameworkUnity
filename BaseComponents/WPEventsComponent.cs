@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WPEventsComponent : MonoBehaviour
+namespace SavageCodes.Frameworks.Weapons
 {
-   
-  private EventsManager _eventSystem;
-
-  public EventsManager EventSystem => _eventSystem;
-
-  public void Initialize()
+  public class WPEventsComponent : MonoBehaviour
   {
-    _eventSystem = new EventsManager();
+
+    private EventsManager _eventSystem;
+
+    public EventsManager EventSystem => _eventSystem;
+
+    public void Initialize()
+    {
+      _eventSystem = new EventsManager();
+    }
   }
 }

@@ -2,40 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WPBaseShootComponent : WPBaseWeaponComponent
+namespace SavageCodes.Frameworks.Weapons
 {
-    [Header("Setup")] 
-    [SerializeField] 
-    private EWPShootType ShootType;
-    [SerializeField] 
-    protected Bullet _bullet;
-    [SerializeField] 
-    protected int _ammoConsumedPerShoot;
-    protected WPFireSocketsComponent _fireSocketComponent;
-    protected WPBaseAimComponent _aimComponent;
-    
-    
-
-    public override void Initialize(Weapon weapon)
+    public class WPBaseShootComponent : WPBaseWeaponComponent
     {
-        base.Initialize(weapon);
-        _baseWeaponInstance.EventsComponent.EventSystem.SubscribeToEvent(WeaponEventsID.ON_SHOOT,ProcessShoot);
-        _fireSocketComponent = GetComponent<WPFireSocketsComponent>();
-        _aimComponent = GetComponent<WPBaseAimComponent>();
-    }
+        [Header("Setup")] [SerializeField] private EWPShootType ShootType;
+        [SerializeField] protected Bullet _bullet;
+        [SerializeField] protected int _ammoConsumedPerShoot;
+        protected WPFireSocketsComponent _fireSocketComponent;
+        protected WPBaseAimComponent _aimComponent;
 
-    void ProcessShoot(object[] p)
-    {
-        if (ShootType != (EWPShootType) p[0] || !_baseWeaponInstance.CanExecuteAction((int)ComponentBlockConditions,true)) 
-            return;
-        
-        _baseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_CONSUMED,_ammoConsumedPerShoot);
-        SpawnShoot();
-    }
 
-    public virtual void SpawnShoot()
-    {
-        
-    }
 
+        public override void Initialize(Weapon weapon)
+        {
+            base.Initialize(weapon);
+            _baseWeaponInstance.EventsComponent.EventSystem.SubscribeToEvent(WeaponEventsID.ON_SHOOT, ProcessShoot);
+            _fireSocketComponent = GetComponent<WPFireSocketsComponent>();
+            _aimComponent = GetComponent<WPBaseAimComponent>();
+        }
+
+        void ProcessShoot(object[] p)
+        {
+            if (ShootType != (EWPShootType) p[0] ||
+                !_baseWeaponInstance.CanExecuteAction((int) ComponentBlockConditions, true))
+                return;
+
+            _baseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_CONSUMED,
+                _ammoConsumedPerShoot);
+            SpawnShoot();
+        }
+
+        public virtual void SpawnShoot()
+        {
+
+        }
+
+    }
 }
