@@ -9,5 +9,10 @@ namespace SavageCodes.Frameworks.Weapons
   {
     Rigidbody GetRigidBody();
     Tuple<Vector3, Quaternion> GetPointOfView();
+
+    //TODO : Unify this in a Enum Net mode
+    bool IsServer();
+    bool IsLocalPlayer();
+
   }
 }

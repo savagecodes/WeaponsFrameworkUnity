@@ -10,6 +10,7 @@
         public static string ON_SHOOT_REQUEST_STOP = "ON_SHOOT_REQUEST_STOP";
         public static string ON_RELOAD_REQUEST = "ON_RELOAD_REQUEST";
         public static string ON_CYCLE_TARGET_REQUEST = "ON_CYCLE_TARGET_REQUEST";
-
+        public static string ON_PROJECTILE_SPAWNED = "ON_PROJECTILE_SPAWNED";
+        public static string ON_SHOOT_HIT = "ON_SHOOT_HIT";
     }
 }

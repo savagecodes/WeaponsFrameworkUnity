@@ -28,14 +28,14 @@ namespace SavageCodes.Frameworks.Weapons
                     _currentTriggerState =
                         Utility.SetBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_PRESSED);
                     _currentTriggerState =
-                        Utility.ClearBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_REALEASED);
+                        Utility.ClearBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_RELEASED);
                 });
 
             _baseWeaponInstance.EventsComponent.EventSystem.SubscribeToEvent(WeaponEventsID.ON_SHOOT_REQUEST_STOP,
                 x =>
                 {
                     _currentTriggerState =
-                        Utility.SetBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_REALEASED);
+                        Utility.SetBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_RELEASED);
                     _currentTriggerState =
                         Utility.ClearBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_PRESSED);
                     StartCoroutine(ClearTriggerReleasedFlags());
@@ -45,7 +45,7 @@ namespace SavageCodes.Frameworks.Weapons
         IEnumerator ClearTriggerReleasedFlags()
         {
             yield return new WaitForEndOfFrame();
-            _currentTriggerState = Utility.ClearBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_REALEASED);
+            _currentTriggerState = Utility.ClearBit((int) _currentTriggerState, (int) TriggerState.PRIMARY_RELEASED);
             _canShoot = true;
         }
 

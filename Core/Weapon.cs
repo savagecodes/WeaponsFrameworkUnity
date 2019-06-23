@@ -9,8 +9,9 @@ namespace SavageCodes.Frameworks.Weapons
 	[RequireComponent(typeof(WPEventsComponent), typeof(WPFireSocketsComponent))]
 	public class Weapon : MonoBehaviour
 	{
-		[Header("Setup")] [SerializeField] private WeaponData _weaponData;
-		private WPBaseWeaponComponent[] _components;
+		[Header("Setup")] 
+		[SerializeField] private WeaponData _weaponData;
+		private IWeaponComponent[] _components;
 		private WPEventsComponent _eventsComponent;
 		private IWeaponCarrier _weaponCarrier;
 
@@ -37,7 +38,7 @@ namespace SavageCodes.Frameworks.Weapons
 
 		void InitializeWeaponComponents()
 		{
-			_components = GetComponents<WPBaseWeaponComponent>();
+			_components = GetComponents<IWeaponComponent>();
 
 			for (int i = 0; i < _components.Length; i++)
 			{
@@ -161,8 +162,8 @@ namespace SavageCodes.Frameworks.Weapons
 	{
 		NONE = 0,
 		PRIMARY_PRESSED = 1,
-		PRIMARY_REALEASED = 2,
-		SECONDARY_PRESED = 4,
+		PRIMARY_RELEASED = 2,
+		SECONDARY_PRESSED = 4,
 		SECONDARY_RELEASED = 8
 	}
 
@@ -173,6 +174,6 @@ namespace SavageCodes.Frameworks.Weapons
 		IS_RELOADING = 1 << 0,
 		IS_OUT_OF_AMMO = 1 << 1,
 		IS_OVERHEATED = 1 << 2,
-
+		IS_BEING_CORRECTED = 1 << 3
 	}
 }

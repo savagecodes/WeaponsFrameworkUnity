@@ -6,7 +6,8 @@ namespace SavageCodes.Frameworks.Weapons
 {
     public class WPBaseShootComponent : WPBaseWeaponComponent
     {
-        [Header("Setup")] [SerializeField] private EWPShootType ShootType;
+        [Header("Setup")] 
+        [SerializeField] private EWPShootType ShootType;
         [SerializeField] protected Bullet _bullet;
         [SerializeField] protected int _ammoConsumedPerShoot;
         protected WPFireSocketsComponent _fireSocketComponent;
@@ -24,6 +25,13 @@ namespace SavageCodes.Frameworks.Weapons
 
         void ProcessShoot(object[] p)
         {
+            //TODO: Add Support for predicted Weapons & FX
+            
+            if (!BaseWeaponInstance.WeaponCarrier.IsServer())
+            {
+                return;
+            }
+
             if (ShootType != (EWPShootType) p[0] ||
                 !_baseWeaponInstance.CanExecuteAction((int) ComponentBlockConditions, true))
                 return;
@@ -33,7 +41,7 @@ namespace SavageCodes.Frameworks.Weapons
             SpawnShoot();
         }
 
-        public virtual void SpawnShoot()
+        protected virtual void SpawnShoot()
         {
 
         }

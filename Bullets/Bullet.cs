@@ -2,66 +2,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace SavageCodes.Frameworks.Weapons
 {
     [RequireComponent(typeof(IBulletBehaviour))]
-    public class Bullet : MonoBehaviour/*, IManejable*/
+    public class Bullet : MonoBehaviour
     {
         [Header("Bullets Settings")] 
-        public string id;
-        public int speed;
-        public int lifeSpan;
+        [SerializeField]
+        private float _lifeSpan = 4f;
+        private bool _isReady;
+        private IBulletComponent[] _components;
+        private Weapon _owningWeapon;
+        private EventsManager _eventSystem;
 
-        protected Transform _targetData;
-        IBulletBehaviour behav;
-        //SimpleTimmer timmer;
-        private Rigidbody _rb;
-        bool _isReady;
-        private Vector3 _dir;
+        public EventsManager EventSystem => _eventSystem;
+        public Weapon OwningWeapon => _owningWeapon;
 
-        public string ID
+        void Initialize()
         {
-            get { return id; }
+            _eventSystem = new EventsManager();
+            _components = GetComponents<IBulletComponent>();
+
+            foreach (var component in _components)
+            {
+                component.InitializeComponent(this);
+            }
+            
+            EventSystem.TriggerEvent(BulletEventID.ON_BULLET_SPAWN);
         }
-
-        void Awake()
+        
+        public Bullet SetWeapon(Weapon weapon)
         {
-            _rb = GetComponent<Rigidbody>();
-            behav = GetComponent<IBulletBehaviour>();
-        }
-
-
-        public void Destroy()
-        {
-
-            Destroy(this.gameObject);
-        }
-
-        /*public IManejable Clone()
-        {
-
-            return Instantiate(this.gameObject).GetComponent<Bullet>();
-        }*/
-
-        public Bullet SetFoward(Vector3 forward)
-        {
-            transform.forward = forward;
-            _rb.rotation = Quaternion.LookRotation(forward);
+            _owningWeapon = weapon;
             return this;
         }
 
         public Bullet SetDirection(Vector3 dir)
         {
             transform.forward = dir;
-            _rb.rotation = Quaternion.LookRotation(dir);
-            _dir = dir;
-            return this;
-        }
-
-        public Bullet Setvelocity(Vector3 vel)
-        {
-            _rb.velocity = vel;
             return this;
         }
 
@@ -71,92 +51,40 @@ namespace SavageCodes.Frameworks.Weapons
             return this;
         }
 
-        public Bullet SetRotation(Quaternion r)
+        public Bullet SetLifeSpan(int lifeSpan)
         {
-            // Debug.Log(r);
-            transform.rotation = r;
-            return this;
-        }
-
-        public Bullet SetAngularVelocity(Vector3 v)
-        {
-            _rb.angularVelocity = v;
-            return this;
-        }
-
-        public Bullet SetTarget(Transform target)
-        {
-            _targetData = target;
-            return this;
-        }
-
-
-        public Bullet SetLifeSpan(int l)
-        {
-            lifeSpan = l;
-            return this;
-        }
-
-        public Bullet SetSpeed(int speed)
-        {
-            this.speed = speed;
+            _lifeSpan = lifeSpan;
             return this;
         }
 
         public void Done()
         {
             _isReady = true;
+            
+            Initialize();
         }
 
-        void CustomFixedUpdate()
+        private void Update()
         {
-            if (!_isReady) return;
-
-            if (behav != null) behav.Move(speed, _dir, _targetData);
+            if(!_isReady) 
+                return;
+            
+            foreach (var component in _components)
+            {
+                component.CustomUpdate();
+            }
         }
 
-       /* void CustomUpdate()
+        private void OnDestroy()
         {
-            if (timmer != null) timmer.Update();
-
-        }*/
-
-        public void Init()
-        {
-            if (_rb == null)
-                _rb = gameObject.AddComponent<Rigidbody>();
-            behav = GetComponent<IBulletBehaviour>();
-            //timmer = new SimpleTimmer();
-            //timmer.Create(lifeSpan, behav.Explode);
-            behav.EnableBehav();
-            //SavageEngine.Instance.UpdateManager.RegisterUpdater(UpdatersID.BULLETS_UPDATER, CustomUpdate);
-            //SavageEngine.Instance.UpdateManager.RegisterFixedUpdater(UpdatersID.BULLETS_UPDATER, CustomFixedUpdate);
-            gameObject.SetActive(true);
+            EventSystem.TriggerEvent(BulletEventID.ON_BULLET_DESTROYED);
+            
+            foreach (var component in _components)
+            {
+                component.DestroyComponent();
+            }
+            
+            EventSystem.DisponeAllEvents();
         }
-
-        public Bullet InitWithotPool()
-        {
-            Init();
-            return this;
-        }
-
-        public void Dispose()
-        {
-            _isReady = false;
-            _rb.angularVelocity = Vector3.zero;
-            _rb.velocity = Vector3.zero;
-            behav.DisableBehav();
-            /*if (timmer != null) timmer.Destroy();
-            SavageEngine.Instance.UpdateManager.DeRegisterUpdater(UpdatersID.BULLETS_UPDATER, CustomUpdate);
-            SavageEngine.Instance.UpdateManager.DeregisterFixedUpdater(UpdatersID.BULLETS_UPDATER, CustomFixedUpdate);*/
-            gameObject.SetActive(false);
-
-        }
-
-      /*  private void OnDestroy()
-        {
-           SavageEngine.Instance.UpdateManager.DeRegisterUpdater(UpdatersID.BULLETS_UPDATER, CustomUpdate);
-            SavageEngine.Instance.UpdateManager.DeregisterFixedUpdater(UpdatersID.BULLETS_UPDATER, CustomFixedUpdate);
-        }*/
     }
 }
