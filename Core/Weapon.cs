@@ -24,15 +24,23 @@ namespace SavageCodes.Frameworks.Weapons
 
 		private bool _enabled;
 
+		private bool _isInitialized;
+
+		public bool IsInitialized => _isInitialized;
+
 		public bool IsEnabled => _enabled;
 
 		#region Initialization & Setup
 
 		public void InitializeWeapon()
 		{
+			if(_isInitialized) 
+				return;
+			
 			_eventsComponent = GetComponent<WPEventsComponent>();
 			_eventsComponent.Initialize();
 			InitializeWeaponComponents();
+			_isInitialized = true;
 			//	SavageEngine.instance.UpdateManager.RegisterFixedUpdater(UpdatersID.LEVEL_UPDATER,CustomUpdate);
 		}
 
@@ -144,6 +152,9 @@ namespace SavageCodes.Frameworks.Weapons
 
 		void DestroyWeapon()
 		{
+			if(_components == null) 
+				return;
+			
 			for (int i = 0; i < _components.Length; i++)
 			{
 				_components[i].Destroy();
