@@ -43,6 +43,12 @@ public class WPNetworkInitializer : WPBaseNetworkComponent
         weapon.SetWeaponCarrier(carrier.GetComponentInChildren<IWeaponCarrier>());
         weapon.InitializeWeapon();
         weapon.SetEnable(true);
+        
+        //Move to GSNetInitializer
+        Solidier solidier = (Solidier)carrier.GetComponentInChildren<IWeaponCarrier>();
+        
+        solidier.AcquireWeapon(BaseWeaponInstance);
+
     }
     
 
