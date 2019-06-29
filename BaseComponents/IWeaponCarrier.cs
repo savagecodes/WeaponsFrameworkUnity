@@ -14,5 +14,7 @@ namespace SavageCodes.Frameworks.Weapons
     bool IsServer();
     bool IsLocalPlayer();
 
+    void AcquireWeapon(Weapon weapon);
+
   }
 }
