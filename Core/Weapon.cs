@@ -31,7 +31,7 @@ namespace SavageCodes.Frameworks.Weapons
 		public bool IsEnabled => _enabled;
 
 		#region Initialization & Setup
-
+		
 		public void InitializeWeapon()
 		{
 			if(_isInitialized) 

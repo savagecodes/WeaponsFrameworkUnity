@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using SavageCodes.SavageEngine;
 using UnityEngine;
 
 namespace SavageCodes.Frameworks.Weapons
@@ -15,7 +16,15 @@ namespace SavageCodes.Frameworks.Weapons
 
         void ProcessHit(object[] p)
         {
-            Debug.Log(((RaycastHit)p[0]).collider.gameObject.name);
+            var hitData = (WeaponHitData) p[0];
+            if (hitData.objectHit != null)
+            {
+                //TODO: Remove Dependency in  Health component of Savage Engine
+                
+                hitData.objectHit.GetComponent<Health>()?.TakeDamage(0f);
+                Debug.Log(hitData.objectHit.name);
+            }
+            
         }
     }
 }

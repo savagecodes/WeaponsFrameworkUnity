@@ -8,7 +8,6 @@ namespace SavageCodes.Frameworks.Weapons
     {
         [Header("Setup")] 
         [SerializeField] private EWPShootType ShootType;
-        [SerializeField] protected Bullet _bullet;
         [SerializeField] protected int _ammoConsumedPerShoot;
         protected WPFireSocketsComponent _fireSocketComponent;
         protected WPBaseAimComponent _aimComponent;
@@ -27,7 +26,7 @@ namespace SavageCodes.Frameworks.Weapons
         {
             //TODO: Add Support for predicted Weapons & FX
             
-            if (!BaseWeaponInstance.WeaponCarrier.IsServer())
+            if (!BaseWeaponInstance.WeaponCarrier.IsServer() && !BaseWeaponInstance.WeaponData.isPredicted)
             {
                 return;
             }
