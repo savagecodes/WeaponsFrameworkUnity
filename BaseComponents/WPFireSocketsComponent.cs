@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SavageCodes.Frameworks.Weapons
@@ -12,6 +13,11 @@ namespace SavageCodes.Frameworks.Weapons
         public Transform GetSocket(int index)
         {
             return _fireSockets[index];
+        }
+
+        public void RegisterFireSockets(WPFireSocket[] sockets)
+        {
+            _fireSockets = sockets.Select(x => x.transform).ToArray();
         }
 
         public Transform[] GetAllSockets()
