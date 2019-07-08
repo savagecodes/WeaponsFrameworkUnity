@@ -26,9 +26,9 @@ namespace SavageCodes.Frameworks.Weapons
             
             if(isLocalPlayer) return;
             
-            var spawnPosition = ((Tuple<Vector3, Vector3>) p[0]).Item1;
+           /* var spawnPosition = ((Tuple<Vector3, Vector3>) p[0]).Item1;
             var direction = ((Tuple<Vector3, Vector3>) p[0]).Item2;     
-            RpcSpawnBullet(spawnPosition,direction);
+            RpcSpawnBullet(spawnPosition,direction);*/
             
         }
 
