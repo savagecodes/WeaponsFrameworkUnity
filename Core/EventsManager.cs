@@ -11,6 +11,13 @@ namespace SavageCodes.Frameworks.Weapons
         public delegate void EventReceiver(params object[] parameterContainer);
 
         private Dictionary<string, EventReceiver> _events;
+        private bool _logWarnings = false;
+
+
+        public void EnableLogWarnings()
+        {
+            _logWarnings = true;
+        }
 
         public void SubscribeToEvent(string eventType, EventReceiver listener)
         {
@@ -41,7 +48,9 @@ namespace SavageCodes.Frameworks.Weapons
         {
             if (_events == null)
             {
-                UnityEngine.Debug.LogWarning("No events subscribed");
+                if(_logWarnings) 
+                    UnityEngine.Debug.LogWarning("No events subscribed");
+                
                 return;
             }
 
@@ -54,7 +63,8 @@ namespace SavageCodes.Frameworks.Weapons
 
         public void DisponeAllEvents()
         {
-            _events.Clear();
+            if(_events != null)
+                _events.Clear();
         }
     }
 }
