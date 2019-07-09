@@ -9,6 +9,7 @@ namespace SavageCodes.Frameworks.Weapons
         private void OnCollisionEnter(Collision other)
         {
             Bullet.EventSystem.TriggerEvent(BulletEventID.ON_BULLET_HIT);
+            Destroy(this.gameObject);
         }
     }
 }

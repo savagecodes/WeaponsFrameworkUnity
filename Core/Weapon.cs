@@ -41,7 +41,6 @@ namespace SavageCodes.Frameworks.Weapons
 			_eventsComponent.Initialize();
 			InitializeWeaponComponents();
 			_isInitialized = true;
-			//	SavageEngine.instance.UpdateManager.RegisterFixedUpdater(UpdatersID.LEVEL_UPDATER,CustomUpdate);
 		}
 
 		void InitializeWeaponComponents()
@@ -163,7 +162,6 @@ namespace SavageCodes.Frameworks.Weapons
 
 		private void OnDestroy()
 		{
-			//SavageEngine.instance.UpdateManager.DeregisterUpdater(UpdatersID.LEVEL_UPDATER,CustomUpdate);
 			DestroyWeapon();
 		}
 	}

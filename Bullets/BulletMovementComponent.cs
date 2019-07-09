@@ -12,7 +12,7 @@ namespace SavageCodes.Frameworks.Weapons
         public override void CustomUpdate()
         {
             base.CustomUpdate();
-            transform.position += transform.position + transform.forward * _speed * Time.fixedDeltaTime;
+            transform.position += transform.forward * _speed * Time.fixedDeltaTime;
         }
     }
 }

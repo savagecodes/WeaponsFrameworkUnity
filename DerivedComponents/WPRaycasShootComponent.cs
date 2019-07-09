@@ -25,24 +25,22 @@ namespace SavageCodes.Frameworks.Weapons
 
         }
 
-        Tuple<Vector3,Vector3> SimulateShootWithRaycast(Vector3 direction, Vector3 spawnPosition)
+        WeaponHitData SimulateShootWithRaycast(Vector3 direction, Vector3 spawnPosition)
         {
             RaycastHit hit;
             WeaponHitData hitData = new WeaponHitData();
+            
+            hitData.shootPosition = spawnPosition;
+            hitData.shootDirection = direction;
 
             if (Physics.Raycast(spawnPosition, direction, out hit, BaseWeaponInstance.WeaponData.Range, _targetsMask))
             {
                 hitData.hitPosition = hit.point;
-                hitData.objectHit = hit.collider.gameObject;
-                hitData.shootPosition = spawnPosition;
-                hitData.shootDirection = direction;
-                
+                hitData.objectHit = hit.collider.gameObject;         
                 BaseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_SHOOT_HIT,hitData);
-                
-                return new Tuple<Vector3, Vector3>((hit.point - spawnPosition).normalized, spawnPosition);
             }
 
-            return new Tuple<Vector3, Vector3>(direction, spawnPosition);
+            return hitData;
         }
 
    

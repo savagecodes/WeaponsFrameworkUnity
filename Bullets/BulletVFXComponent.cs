@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using SavageCodes.Frameworks.Weapons;
 using UnityEngine;
 
-public class BulletVFXComponent : MonoBehaviour
+public class BulletVFXComponent : BulletBaseComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Prefab Effects")] 
+    [SerializeField]
+    private GameObject _bulletTrail;
+    [SerializeField]
+    private GameObject _metalImpactEffect;
+    
+    private void OnCollisionEnter(Collision other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Instantiate(_metalImpactEffect,other.GetContact(0).point,Quaternion.LookRotation(-transform.forward));
+        Destroy(this.gameObject);
     }
 }

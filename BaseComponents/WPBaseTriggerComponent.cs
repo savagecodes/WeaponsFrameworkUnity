@@ -7,8 +7,11 @@ namespace SavageCodes.Frameworks.Weapons
     public class WPBaseTriggerComponent : WPBaseWeaponComponent
     {
         [Header("Setup")]
-        //
-        [EnumFlag("Desired P Trigger State")]
+        
+        [SerializeField]
+        private EWPShootType _triggerType;
+
+        [EnumFlag("Desired Trigger State")]
         [SerializeField]
         protected TriggerState _desiredPrimaryTriggerState;
 
@@ -17,6 +20,10 @@ namespace SavageCodes.Frameworks.Weapons
         private float _currentTimeFromLastShoot;
 
         private bool _canShoot = true;
+        
+        #region Getters
+        public EWPShootType TriggerType => _triggerType;
+        #endregion
 
         public override void Initialize(Weapon weapon)
         {
@@ -55,7 +62,7 @@ namespace SavageCodes.Frameworks.Weapons
 
             if ((int) _desiredPrimaryTriggerState == _currentTriggerState)
             {
-                ProcessFireRequest(deltaTime, EWPShootType.PRIMARY);
+                ProcessFireRequest(deltaTime, _triggerType);
             }
         }
 
