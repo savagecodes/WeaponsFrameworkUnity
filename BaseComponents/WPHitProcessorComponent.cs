@@ -18,7 +18,7 @@ namespace SavageCodes.Frameworks.Weapons
             var hitData = (WeaponHitData) p[0];
             if (hitData.objectHit != null)
             {
-                hitData.objectHit.GetComponent<IDamageable>()?.TakeDamage(0f,BaseWeaponInstance.WeaponCarrier);
+                hitData.objectHit.GetComponent<IDamageable>()?.TakeDamage(hitData.damage,BaseWeaponInstance.WeaponCarrier);
                 Debug.Log(hitData.objectHit.name);
             }
             

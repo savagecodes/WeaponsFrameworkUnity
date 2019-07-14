@@ -32,6 +32,7 @@ namespace SavageCodes.Frameworks.Weapons
             
             hitData.shootPosition = spawnPosition;
             hitData.shootDirection = direction;
+            hitData.damage = _damage;
 
             if (Physics.Raycast(spawnPosition, direction, out hit, BaseWeaponInstance.WeaponData.Range, _targetsMask))
             {

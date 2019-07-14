@@ -11,5 +11,6 @@ namespace SavageCodes.Frameworks.Weapons
       public Vector3 hitPosition;
       public float hitTimeInSeconds;
       public GameObject objectHit;
+      public float damage;
    }
 }
