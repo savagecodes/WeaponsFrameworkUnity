@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SavageCodes.Frameworks.Weapons
 {
-    public class WPHitProcessorComponent : WPBaseNetworkComponent
+    public class WPHitProcessorComponent : WPBaseWeaponComponent
     {
         public override void Initialize(Weapon weapon)
         {
@@ -13,7 +13,7 @@ namespace SavageCodes.Frameworks.Weapons
             BaseWeaponInstance.EventsComponent.EventSystem.SubscribeToEvent(WeaponEventsID.ON_SHOOT_HIT,ProcessHit);
         }
 
-        void ProcessHit(object[] p)
+        public virtual void ProcessHit(object[] p)
         {
             var hitData = (WeaponHitData) p[0];
             if (hitData.objectHit != null)
