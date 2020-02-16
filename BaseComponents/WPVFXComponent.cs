@@ -1,5 +1,4 @@
-﻿using SavageCodes.SavageEngine;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
 namespace SavageCodes.Frameworks.Weapons

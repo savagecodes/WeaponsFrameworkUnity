@@ -7,16 +7,20 @@ namespace SavageCodes.Frameworks.Weapons
    public class WPCoolDownComponent : WPBaseWeaponComponent
    {
 
-      [Header("Setup")] [SerializeField] private float _maxHeatAllowed;
+      [Header("Setup")] 
+      [SerializeField] private float _maxHeatAllowed;
       [SerializeField] private float _heatGeneratedPerShoot;
       [SerializeField] private float _timeToCoolDown;
       [SerializeField] private float _timeBeforeStartCoollingDown;
 
       private float _currentHeat;
-
       private float _timeSinceLastShoot;
       private float _coolDownRate;
       private bool _isCollingDown;
+      
+      public float MaxHeatAllowed => _maxHeatAllowed;
+      public float CurrentHeat => _currentHeat;
+      public bool IsCollingDown => _isCollingDown;
 
       public override void Initialize(Weapon weapon)
       {
