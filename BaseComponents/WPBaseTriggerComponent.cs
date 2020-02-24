@@ -17,12 +17,14 @@ namespace SavageCodes.Frameworks.Weapons
 
         private int _currentTriggerState = 0;
 
-        private float _currentTimeFromLastShoot;
+        private float _currentTimeFromLastShoot = 0;
 
         private bool _canShoot = true;
         
         #region Getters
         public EWPShootType TriggerType => _triggerType;
+        public TriggerState DesiredPrimaryTriggerState => _desiredPrimaryTriggerState;
+        public int CurrentTriggerState => _currentTriggerState;
         #endregion
 
         public override void Initialize(Weapon weapon)
@@ -64,6 +66,8 @@ namespace SavageCodes.Frameworks.Weapons
             {
                 ProcessFireRequest(deltaTime, _triggerType);
             }
+            
+            _currentTimeFromLastShoot += deltaTime;
         }
 
         void ProcessFireRequest(float deltaTime, EWPShootType shootType)
@@ -79,9 +83,7 @@ namespace SavageCodes.Frameworks.Weapons
                 _canShoot = false;
                 return;
             }
-
-            _currentTimeFromLastShoot += deltaTime;
-
+            
             if (_currentTimeFromLastShoot > 1 / BaseWeaponInstance.WeaponData.FireRate)
             {
                 _baseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_SHOOT, shootType);
