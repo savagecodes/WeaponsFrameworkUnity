@@ -29,6 +29,8 @@ namespace SavageCodes.Frameworks.Weapons
 
 		public bool IsEnabled => _enabled;
 
+		public Action<Weapon> OnWeaponInitialized = weapon => { };
+
 		#region Initialization & Setup
 		
 		public void InitializeWeapon()
@@ -40,6 +42,7 @@ namespace SavageCodes.Frameworks.Weapons
 			_eventsComponent.Initialize();
 			InitializeWeaponComponents();
 			_isInitialized = true;
+			OnWeaponInitialized(this);
 		}
 
 		void InitializeWeaponComponents()

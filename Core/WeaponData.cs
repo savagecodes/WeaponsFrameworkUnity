@@ -10,10 +10,13 @@ namespace SavageCodes.Frameworks.Weapons
     {
         [Header("Setup")] 
         public bool isPredicted = false;
-        [Header("Basic Info")] public string WeaponID;
+        [Header("Basic Info")] 
+        public string WeaponID;
         public float Range;
         public float FireRate;
 
-        [Header("UI Settings")] public Image CrossHair;
+        [Header("UI Settings")]
+        public Image CrossHair;
+        public Sprite HudIcon;
     }
 }
