@@ -6,7 +6,10 @@ namespace SavageCodes.Frameworks.Weapons
 {
    public class WPBaseAimComponent : WPBaseWeaponComponent
    {
-
+      [SerializeField] 
+      protected bool isMultiTargetWeapon;
+      public bool IsMultiTargetWeapon => isMultiTargetWeapon;
+      
       protected Transform _fakeTarget;
 
       public virtual Transform GetAimTarget(Vector3 fromPosition)

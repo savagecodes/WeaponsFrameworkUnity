@@ -33,6 +33,10 @@ namespace SavageCodes.Frameworks.Weapons
 
         void ConsumeAmmo(int amount)
         {
+            if (_hasInfiniteAmmo)
+            {
+                return;
+            }
             _currentCapacity -= amount > _currentCapacity ? _currentCapacity : amount;
             BaseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_UPDATED,
                 _currentCapacity);
