@@ -38,7 +38,9 @@ namespace SavageCodes.Frameworks.Weapons
                 _currentCapacity);
 
             if (_currentCapacity == 0)
-                Utility.SetBit(_baseWeaponInstance.CurrentBlockConditions, (int) BlockConditions.IS_OUT_OF_AMMO);
+            {
+                BaseWeaponInstance.CurrentBlockConditions = Utility.SetBit(_baseWeaponInstance.CurrentBlockConditions, (int) BlockConditions.IS_OUT_OF_AMMO);
+            }
         }
 
     }

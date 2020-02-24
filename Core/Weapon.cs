@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.UI;
 
 namespace SavageCodes.Frameworks.Weapons
 {
@@ -20,7 +19,7 @@ namespace SavageCodes.Frameworks.Weapons
 		public WeaponData WeaponData => _weaponData;
 		public WPEventsComponent EventsComponent => _eventsComponent;
 
-		[NonSerialized] public int CurrentBlockConditions;
+		[NonSerialized] public int CurrentBlockConditions = 0;
 
 		private bool _enabled;
 
@@ -70,7 +69,6 @@ namespace SavageCodes.Frameworks.Weapons
 
 		void Update()
 		{
-
 			if (_components == null || _components.Length == 0) return;
 			for (int i = 0; i < _components.Length; i++)
 			{
