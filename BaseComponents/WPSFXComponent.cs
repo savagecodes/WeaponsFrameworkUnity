@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using SavageCodes.Frameworks.Weapons;
 using UnityEngine;
 
-public class WPSFXComponent : MonoBehaviour
+public class WPSFXComponent : WPBaseWeaponComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Initialize(Weapon weapon)
     {
-        
+        base.Initialize(weapon);
+        BaseWeaponInstance.EventsComponent.EventSystem.SubscribeToEvent(WeaponEventsID.ON_SHOOT,OnShoot);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void OnShoot(object[] p)
     {
         
     }
+    
 }
