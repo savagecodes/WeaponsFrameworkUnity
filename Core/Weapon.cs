@@ -60,6 +60,8 @@ namespace SavageCodes.Frameworks.Weapons
 			_enabled = state;
 
 			EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_WEAPON_STATE_CHANGED, state);
+			
+			EventsComponent.EventSystem.TriggerEvent(IsEnabled ? WeaponEventsID.ON_WEAPON_ENABLED : WeaponEventsID.ON_WEAPON_DISABLED);
 
 		}
 
@@ -72,7 +74,16 @@ namespace SavageCodes.Frameworks.Weapons
 
 		void Update()
 		{
-			if (_components == null || _components.Length == 0) return;
+			if (!IsEnabled)
+			{
+				return;
+			}
+
+			if (_components == null || _components.Length == 0)
+			{
+				return;
+			}
+			
 			for (int i = 0; i < _components.Length; i++)
 			{
 				_components[i].CustomUpdate(Time.deltaTime);

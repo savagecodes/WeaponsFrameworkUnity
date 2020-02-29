@@ -34,15 +34,14 @@ namespace SavageCodes.Frameworks.Weapons
             if (ShootType != (EWPShootType) p[0] ||
                 !_baseWeaponInstance.CanExecuteAction((int) ComponentBlockConditions, true))
                 return;
-
-            _baseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_CONSUMED,
-                _ammoConsumedPerShoot);
+            
             SpawnShoot();
         }
 
         protected virtual void SpawnShoot()
         {
-
+            _baseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_CONSUMED,
+                _ammoConsumedPerShoot);
         }
 
     }

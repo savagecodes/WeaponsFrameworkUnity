@@ -38,13 +38,14 @@ namespace SavageCodes.Frameworks.Weapons
                 return;
             }
             _currentCapacity -= amount > _currentCapacity ? _currentCapacity : amount;
-            BaseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_UPDATED,
-                _currentCapacity);
-
+            
             if (_currentCapacity == 0)
             {
                 BaseWeaponInstance.CurrentBlockConditions = Utility.SetBit(_baseWeaponInstance.CurrentBlockConditions, (int) BlockConditions.IS_OUT_OF_AMMO);
             }
+            
+            BaseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_UPDATED,
+                _currentCapacity);
         }
 
     }

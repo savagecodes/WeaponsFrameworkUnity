@@ -12,5 +12,7 @@
         public static string ON_CYCLE_TARGET_REQUEST = "ON_CYCLE_TARGET_REQUEST";
         public static string ON_PROJECTILE_SPAWNED = "ON_PROJECTILE_SPAWNED";
         public static string ON_SHOOT_HIT = "ON_SHOOT_HIT";
+        public static string ON_WEAPON_ENABLED = "ON_WEAPON_ENABLED";
+        public static string ON_WEAPON_DISABLED = "ON_WEAPON_DISABLED";
     }
 }
