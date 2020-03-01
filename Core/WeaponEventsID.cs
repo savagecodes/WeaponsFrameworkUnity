@@ -14,5 +14,6 @@
         public static string ON_SHOOT_HIT = "ON_SHOOT_HIT";
         public static string ON_WEAPON_ENABLED = "ON_WEAPON_ENABLED";
         public static string ON_WEAPON_DISABLED = "ON_WEAPON_DISABLED";
+        public static string ON_WEAPON_OVERHEATED = "ON_WEAPON_DISABLED";
     }
 }

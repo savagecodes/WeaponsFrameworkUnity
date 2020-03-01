@@ -38,6 +38,7 @@ namespace SavageCodes.Frameworks.Weapons
          {
             BaseWeaponInstance.CurrentBlockConditions = Utility.SetBit(BaseWeaponInstance.CurrentBlockConditions,
                (int) BlockConditions.IS_OVERHEATED);
+            BaseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_WEAPON_OVERHEATED);
          }
       }
 

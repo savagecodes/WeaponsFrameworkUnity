@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WPSFXComponent : WPBaseWeaponComponent
 {
+    [SerializeField]
+    private AudioSource _shootSoundSource;
+    
     public override void Initialize(Weapon weapon)
     {
         base.Initialize(weapon);
@@ -13,7 +16,10 @@ public class WPSFXComponent : WPBaseWeaponComponent
 
     protected virtual void OnShoot(object[] p)
     {
-        
+        if (_shootSoundSource)
+        {
+            _shootSoundSource.Play();
+        }
     }
     
 }
