@@ -10,6 +10,7 @@ namespace SavageCodes.Frameworks.Weapons
         [Header("Setup")] public int availableAmmo;
         [SerializeField] protected int _maxCapacityPerCharge;
         [SerializeField] protected bool _hasInfiniteAmmo;
+        [SerializeField] protected bool _startEmpty;
 
         protected int _currentCapacity;
 
@@ -26,7 +27,16 @@ namespace SavageCodes.Frameworks.Weapons
         {
             base.Initialize(weapon);
 
-            _currentCapacity = _maxCapacityPerCharge;
+            if (_startEmpty)
+            {
+                _currentCapacity = 0;
+                BaseWeaponInstance.CurrentBlockConditions = Utility.SetBit(_baseWeaponInstance.CurrentBlockConditions, (int) BlockConditions.IS_OUT_OF_AMMO);
+            }
+            else
+            {
+                _currentCapacity = _maxCapacityPerCharge;
+            }
+            
             _baseWeaponInstance.EventsComponent.EventSystem.SubscribeToEvent(WeaponEventsID.ON_AMMO_CONSUMED,
                 x => { ConsumeAmmo((int) x[0]); });
         }

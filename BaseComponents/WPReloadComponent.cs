@@ -23,7 +23,11 @@ namespace SavageCodes.Frameworks.Weapons
                Reload();
             }
          });
+      }
 
+      public void ManualReload()
+      {
+         Reload();
       }
 
       void Reload()
@@ -50,6 +54,8 @@ namespace SavageCodes.Frameworks.Weapons
             (int) BlockConditions.IS_RELOADING);
          BaseWeaponInstance.CurrentBlockConditions = Utility.ClearBit(_baseWeaponInstance.CurrentBlockConditions,
             (int) BlockConditions.IS_OUT_OF_AMMO);
+         
+         BaseWeaponInstance.EventsComponent.EventSystem.TriggerEvent(WeaponEventsID.ON_AMMO_UPDATED,_currentCapacity);
       }
    }
 }

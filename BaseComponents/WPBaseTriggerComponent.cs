@@ -17,7 +17,7 @@ namespace SavageCodes.Frameworks.Weapons
 
         private int _currentTriggerState = 0;
 
-        private float _currentTimeFromLastShoot = 0;
+        private float _currentTimeFromLastShoot = 1000;
 
         private bool _canShoot = true;
         
